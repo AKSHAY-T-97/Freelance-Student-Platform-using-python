@@ -1,0 +1,198 @@
+{% extends 'recruits/recruiter_nav.html' %}
+{% load static %}
+{% block content %} 
+
+    <main>
+   <section id="welcome" style="background-image: url('{% static 'images/recruiter_home.png' %}'); background-size: cover;">
+  <h2 style="color: #4CAF50; font-size: 36px;">Welcome </h2><span style="color: black;font-size:28px;font-weight: bold">{{full_details.name}}</span><h2> to Hire Me Now.</h2>
+  <p style="color: #666; font-size: 18px;"><b>
+  "Welcome, recruiters! We're thrilled that you've decided to visit our website to find your next great hire". </b>
+  </p>
+  <a href="/recruiter_stud/add_job" class="btn btn-warning" style="margin-top: 20px;">ADD JOB</a>
+</section>
+     
+<section id="Lorem-Ipsum">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <img src="{% static 'images/recruiter1.png' %}" style="width: 100%">
+      </div>
+      <div class="col-md-6">
+        <h3>Find Your Next Hire on Our Platform . . .</h3>
+        <p>
+         "Welcome to our website! Recruiters can find the best students or freshers for their job by simply posting their job here. We connect talented candidates with great opportunities. Join us and take the first step towards building your dream team!"
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+    </main>
+
+
+
+<style type="text/css">
+ h2 {
+    font-size: 36px;
+    text-align: center;
+    color: orange;
+    text-shadow: 2px 2px #ddd;
+    padding: 20px;
+    background-image: linear-gradient(to right, black, violet);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  /* Global styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  background-color: #f2f2f2;
+}
+
+a {
+  text-decoration: none;
+  color: #333;
+}
+
+ul {
+  list-style: none;
+}
+
+/* Header styles */
+header {
+  background-color: #fff;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+nav ul {
+  display: flex;
+}
+
+nav li {
+  margin-left: 20px;
+}
+
+nav a {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/* Main styles */
+main {
+  margin-top: 80px;
+  padding: 40px;
+}
+
+#welcome {
+  background-color: #fff;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+#welcome h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+#welcome p {
+  font-size: 24px;
+  margin-bottom: 40px;
+}
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #ffd700;
+  color: black;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 0 10px #7fff00;
+}
+
+.btn:hover {
+  background-color: #ffd700;
+  cursor: pointer;
+  animation: shine 1s forwards;
+}
+
+@keyframes shine {
+  0% {
+    box-shadow: 0 0 100px #7fff00;
+  }
+  50% {
+    box-shadow: 0 0 200px #7fff00;
+  }
+  100% {
+    box-shadow: 0 0 100px #7fff00;
+  }
+}
+/* Aside styles */
+aside {
+  position: fixed;
+  top: 200px;
+  right: 40px;
+}
+
+@media screen and (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  nav ul {
+    margin-top: 20px;
+  }
+
+  nav li {
+    margin: 0;
+    margin-right: 20px;
+  }
+
+  main {
+    padding: 20px;
+  }
+
+  #welcome {
+    padding: 20px;
+  }
+
+  #welcome h1 {
+    font-size: 36px;
+  }
+
+  #welcome p {
+    font-size: 18px;
+  }
+
+  aside {
+    display: none;
+  }
+}
+
+</style>
+  {% endblock %}

@@ -1,0 +1,203 @@
+<!-- Include Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<!-- Include Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<div class="container-fluid">
+   <br><br>
+  <div class="row">
+  {% for job in page_obj %}
+    <div class="col-md-4 mb-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title mb-4" style="text-align: center;color:navy;font-family: 'Helvetica Neue', sans-serif;font-size: 24px;">{{ job.job_title }}</h5>
+          <div class="d-flex justify-content-center mb-3">
+            <span class="material-icons text-success me-1">Description : </span>
+            <p class="card-text mb-0 text-success">{{ job.job_description }}</p>
+          </div>
+          <div class="d-flex justify-content-center mb-3">
+            <span class="material-icons text-success me-1">Schedule : </span>
+            <p class="card-text mb-0 text-success">{{ job.job_duration }}</p>
+          </div>
+          <div class="d-flex justify-content-center mb-3">
+            <span class="material-icons text-success me-1">Attach_money : </span>
+            <p class="card-text mb-0 text-success">{{ job.job_budget }}</p>
+          </div>
+          <div class="d-flex justify-content-center mt-4">
+            <!-- Button to open modal -->
+            <a href="#" class="btn btn-primary me-2" data-toggle="modal" data-target="#interestedModal{{ job.id }}" value="{{ job.recruiters_id }}"><span class="material-icons me-1"></span> VIEW FULL DETAILS & SEND MESSAGE</a>
+          </div>
+          <div class="mt-4" style="text-align: center;color:grey">
+            <p class="card-text mb-0">{{ job.created_at }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+ 
+<form method="POST" action="/student/messages">
+        {% csrf_token %}
+         {% for job in page_obj %}
+  <div class="modal fade" id="interestedModal{{ job.id }}" tabindex="-1" role="dialog" aria-labelledby="interestedModalLabel{{ job.id }}" aria-hidden="true">
+    <br><br>
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+
+        <div class="modal-header">
+
+          <h5 class="modal-title" id="interestedModalLabel{{ job.id }}">Send Message</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p class="card-text mb-2" style="text-align: center;color:black;font-size:30;"><b>{{ job.job_title }}</b></p>
+          <p class="card-text mb-2" style="text-align: center;color:black;font-size:30;"><b>{{ job.job_description }}</b></p>
+          <p class="card-text mb-2" style="text-align: center;color:green">Duration : {{ job.job_duration }}</p>
+          <p class="card-text mb-2" style="text-align: center;color:green" >Budget : {{ job.job_budget }}</p>
+          <p class="card-text mb-2" style="text-align: center;color:green" >Phone :  {{ job.contact_phone }}</p>
+          <p class="card-text mb-2" style="text-align: center;color:green" >Mail id : {{ job.contact_email }}</p>
+          <p class="card-text mb-2" style="text-align: center;color:green"><b>company : {{ job.company_name }}</b></p>
+          
+             
+           
+            <div class="form-group">
+               <input type="text" name="jobs_id" class="form-control" id="jobs_id" rows="3" value="{{job.id}}" hidden>
+              <label for="message">Message:</label>
+              <textarea class="form-control" name="more_info" id="more_info" rows="3" class="more_info"></textarea>
+            </div>
+          
+        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Send</button>
+      </div>
+    </div>
+  </div>
+</div>
+ {% endfor %}
+</form>
+ 
+
+  <div class="pagination mt-4">
+    <ul class="pagination justify-content-center">
+      {% if page_obj.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?page=1" aria-label="First">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+          <span aria-hidden="true">&lsaquo;</span>
+        </a>
+      </li>
+      {% endif %}
+
+      <li class="page-item active" aria-current="page">
+        <a class="page-link" href="#">{{ page_obj.number }}</a>
+      </li>
+
+      {% if page_obj.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+          <span aria-hidden="true">&rsaquo;</span>
+        </a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Last">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+      {% endif %}
+    </ul>
+  </div>
+</div>
+</div></div></div></div>
+
+
+
+
+
+
+
+<style type="text/css">
+   .card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .card:hover {
+    transform: scale(1.02);
+  }
+
+  .card-title {
+    font-size: 24px;
+    color: #2c3e50;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-text {
+    color: #34495e;
+    font-size: 16px;
+    margin-bottom: 0.25rem;
+  }
+
+  .btn-primary {
+    background-color: #3498db;
+    border-color: #3498db;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease-in-out;
+  }
+
+  .btn-primary:hover {
+    background-color: #2980b9;
+  }
+
+  .modal-title {
+    font-size: 24px;
+    color: #2c3e50;
+    font-weight: bold;
+  }
+
+  .form-group label {
+    font-size: 16px;
+    color: #2c3e50;
+    font-weight: bold;
+  }
+
+  .form-control {
+    font-size: 16px;
+    color: #34495e;
+    background-color: #ecf0f1;
+    border-color: transparent;
+    border-radius: 5px;
+    transition: border-color 0.2s ease-in-out;
+  }
+
+  .form-control:focus {
+    border-color: #3498db;
+    box-shadow: none;
+  }
+
+  .btn-secondary {
+    background-color: #bdc3c7;
+    border-color: #bdc3c7;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease-in-out;
+  }
+
+  .btn-secondary:hover {
+    background-color: #95a5a6;
+  }
+</style>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>

@@ -1,0 +1,136 @@
+{% extends 'recruits/recruiter_nav.html' %}
+{% load static %}
+{% block content %} 
+<br><br><br>
+
+  <br>
+   <button class="btn btn-secondary back-btn" style="margin-left: 10px;background-color: grey" onclick="history.back()">Back</button>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      {% if jobs_status %}
+        {% for job_status in jobs_status %}
+        <div class="card mb-3">
+          <div class="card-header">
+            <h3>JOB TITLE : {{ job_status.Job.job_title }}</h3>
+          </div>
+          <div class="card-body">
+            <h4 class="card-title"> STUDENT : <b>{{ job_status.students_ids.username }}</b></h4>
+             <h4 class="card-title"> EMAIL : <b>{{ job_status.students_ids.email }}</b></h4>
+            <p class="card-text"> MESSAGE : {{ job_status.messages}}</p>
+            <p class="card-text"><b><div id="message"></div></b></p><br>
+            <button class="btn btn-primary accept" data-job-id="{{ job_status.Job.id }}" data-student-id="{{ job_status.students_ids.id }}">Accept</button>
+            <button class="btn btn-danger reject" data-job-id="{{ job_status.Job.id }}" data-student-id="{{ job_status.students_ids.id }}">Reject</button>
+          </div>
+        </div>
+        {% endfor %}
+      {% else %}
+        <div class="card mb-3">
+          <div class="card-body">
+            <p class="card-text"><b>You have already rejected this message.</b></p>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+<br>
+<br><br><br><br><br><br><br><br><br><br>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.accept').click(function() {
+            var jobId = $(this).data('job-id');
+            var studentId = $(this).data('student-id');
+            $.ajax({
+                url: '/recruiter_stud/accept_reject',
+                type: 'POST',
+                data: {
+                    'job_id': jobId,
+                    'student_id': studentId,
+                    'action': 'accept',
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                success: function(response) {
+                    $('#message').html(response);
+                }
+            });
+        });
+
+        $('.reject').click(function() {
+            var jobId = $(this).data('job-id');
+            var studentId = $(this).data('student-id');
+            $.ajax({
+                url: '/recruiter_stud/accept_reject',
+                type: 'POST',
+                data: {
+                    'job_id': jobId,
+                    'student_id': studentId,
+                    'action': 'reject',
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                success: function(response) {
+                     $('#message').html(response);
+                }
+            });
+        });
+    });
+</script>
+    </div>
+  </div>
+</div>
+<style>
+.job {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.job h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.job p {
+  margin-bottom: 0;
+}
+
+.job .accept {
+  background-color: #28a745;
+  border: none;
+}
+
+.job .reject {
+  background-color: #dc3545;
+  border: none;
+}
+
+.job .accept:hover,
+.job .reject:hover {
+  opacity: 0.8;
+}
+
+.card {
+  margin-bottom: 20px;
+}
+
+.card-header h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.card-body h4 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.card-body p {
+  margin-bottom: 0;
+}
+</style>
+
+  {% endblock %}

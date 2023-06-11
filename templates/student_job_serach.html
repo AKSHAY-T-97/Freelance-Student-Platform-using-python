@@ -1,0 +1,310 @@
+
+{% extends 'index/login_navbar.html' %}
+{% load static %}
+{% block content %} 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<br><div class="page-title">
+	
+  <h1>Fnd Latest Jobs</h1>
+ &nbsp;  &nbsp; &nbsp;<p style="color: black">Find the best opportunities .</p>
+</div><br>
+<div class="search-bar">
+  <h4><b>SEARCH:</b></h4>
+  <div class="input-group">
+    <input type="search" class="form-control rounded" placeholder="Search" name="search" id="search">
+    <button type="button" class="btn btn-outline-primary" name="btnsearch" id="btnsearch">Search</button>
+     <label for="job_category" class="form-label"><b>Job Category:</b></label>
+  <select id="job_category" name="job_category" class="form-control" required>
+    <option value="" selected disabled>Select a category</option>
+    <option value="software_development">Software Development</option>
+    <option value="web_development">Web Development</option>
+    <option value="mobile_development">Mobile Development</option>
+    <option value="game_development">Game Development</option>
+    <option value="artificial_intelligence">Artificial Intelligence</option>
+    <option value="blockchain">Blockchain Development</option>
+    <option value="data_analysis">Data Analysis</option>
+    <option value="data_entry">Data Entry</option>
+    <option value="project_management">Project Management</option>
+    <option value="sales_marketing">Sales and Marketing</option>
+    <option value="digital_marketing">Digital Marketing</option>
+    <option value="social_media">Social Media Management</option>
+    <option value="content_writing">Content Writing</option>
+    <option value="copywriting">Copywriting</option>
+    <option value="blog_writing">Blog Writing</option>
+    <option value="article_writing">Article Writing</option>
+    <option value="technical_writing">Technical Writing</option>
+    <option value="creative_writing">Creative Writing</option>
+    <option value="translation">Translation</option>
+    <option value="audio_production">Audio Production</option>
+    <option value="video_editing">Video Editing</option>
+    <option value="animation">Animation</option>
+    <option value="3d_design">3D Design</option>
+    <option value="graphic_design">Graphic Design</option>
+    <option value="logo_design">Logo Design</option>
+    <option value="illustration">Illustration</option>
+    <option value="branding">Branding</option>
+    <option value="packaging_design">Packaging Design</option>
+    <option value="print_design">Print Design</option>
+    <option value="product_design">Product Design</option>
+    <option value="user_experience_design">User Experience Design</option>
+    <option value="user_interface_design">User Interface Design</option>
+    <option value="photography">Photography</option>
+    <option value="virtual_assistant">Virtual Assistant</option>
+    <option value="customer_support">Customer Support</option>
+    <option value="administrative_support">Administrative Support</option>
+    <option value="accounting">Accounting</option>
+    <option value="bookkeeping">Bookkeeping</option>
+    <option value="tax_preparation">Tax Preparation</option>
+    <option value="business_consulting">Business Consulting</option>
+    <option value="legal_services">Legal Services</option>
+    <option value="real_estate">Real Estate</option>
+    <option value="architecture">Architecture</option>
+    <option value="interior_design">Interior Design</option>
+    <option value="landscape_design">Landscape Design</option>
+    <option value="energy_consulting">Energy Consulting</option>
+    <option value="market_research">Market Research</option>
+    <option value="telemarketing">Telemarketing</option>
+    <option value="other">Other</option>
+  </select>
+</div>
+  </div>
+  
+</div>
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags and message.tags == 'success' %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+<!-- Your HTML form code here -->
+
+<div id="job-list-container">
+	{% include 'student_job_list_pagination.html' %}
+
+ </div>
+ <button class="btn btn-secondary back-btn" style="margin-left: 10px;background-color: grey" onclick="history.back()">Back</button>
+ <script type="text/javascript">
+$(document).ready(function() {
+  $('#search, #job_category').on('keyup change', function() {
+    var search_text = $('#search').val();
+    var job_category = $('#job_category').val();
+    
+
+    $.ajax({
+      url: '/student/search_job',
+      type: 'GET',
+      data: { search: search_text,job_category:job_category },
+      dataType: 'json',
+      success: function(response) {
+        $('#job-list-container').html(response);
+      },
+      error: function(xhr, status, error) {
+        console.log(error);
+      }
+    });
+  });
+});
+</script>
+<!-- Display pagination links -->
+<style type="text/css">
+	.page-title {
+  background-image: url('{% static 'images/job_search_header.png' %}');
+  background-size: cover;
+  background-position: center center;
+  height: 300px; /* set the desired height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff; /* set the desired text color */
+  text-align: center;
+}
+.page-title h1, .page-title p {
+  margin: 0;
+}
+.page-title p {
+  font-size: 18px;
+  margin-top: 10px;
+}
+	
+.page-title h1 {
+  font-size: 48px;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 10px;
+}
+
+.page-title p {
+  font-size: 18px;
+  color: #666666;
+  margin: 0;
+}
+    .search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 80%;
+  margin: 0 auto;
+  padding: 12px;
+}
+
+.search-bar h4 {
+  margin: 0;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  margin-left: 50px;
+}
+
+.sort-bar {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  margin-left: 30px;
+}
+
+.sort-bar label {
+  margin-right: 10px;
+}
+
+.form-control {
+  width: 100%;
+}
+
+.btn {
+  margin: 0 5px;
+}
+
+.btn-outline-primary {
+  color: #007bff;
+  background-color: transparent;
+  border-color: #007bff;
+}
+
+.btn-outline-primary:hover {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-outline-danger {
+  color: #dc3545;
+  background-color: transparent;
+  border-color: #dc3545;
+}
+
+.btn-outline-danger:hover {
+  color: #fff;
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.table {
+  border-radius: 2;
+  border-color: black;
+  margin-top: 20px;
+}
+
+.table th {
+  color: white;
+  background-color: #e638f4;;
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.page-item {
+  display: inline-block;
+  margin: 0 5px;
+}
+
+.page-link {
+  color: #007bff;
+  background-color: transparent;
+  border-color: #007bff;
+}
+
+.page-link:hover {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+ .card-body {
+        padding: 0;
+    }
+    
+    table {
+        border-collapse: separate;
+        border-spacing: 0 10px;
+        width: 100%;
+    }
+    
+    th, td {
+        padding: 10px;
+        text-align: left;
+    }
+    
+    th {
+        background-color: #F1F1F1;
+    }
+    
+    tr:nth-child(even) {
+        background-color: #F9F9F9;
+    }
+    
+    .delete_button {
+        background-color: transparent;
+        border: none;
+        padding: 0;
+    }
+    
+    .delete_button a {
+        color: red;
+    }
+    
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 30px;
+    }
+    
+    .step-links a {
+        padding: 5px;
+        text-decoration: none;
+        color: #333;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin: 0 5px;
+    }
+    
+    .step-links a:hover {
+        background-color: #ddd;
+    }
+    
+    .current-page {
+        font-weight: bold;
+        margin: 0 10px;
+    }
+</style>
+{% endblock %}

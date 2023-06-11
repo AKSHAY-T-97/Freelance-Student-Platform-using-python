@@ -1,0 +1,301 @@
+{% extends 'recruits/recruiter_nav.html' %}
+{% load static %}
+{% block content %} 
+<br><br><br>
+  <br>
+   <button class="btn btn-secondary back-btn" style="margin-left: 10px;background-color: grey" onclick="history.back()">Back</button>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <header>
+   
+      </header>
+      <main>
+        <form method="POST" action="/recruiter_stud/add_job">
+          {% csrf_token %}
+          <fieldset>
+            <legend>Job Details</legend>
+            <div class="mb-3">
+              <label for="job_title" class="form-label">Job Title:</label>
+              <input type="text" id="job_title" name="job_title" class="form-control" required>
+            </div>
+            <div class="mb-3">
+  <label for="job_category" class="form-label">Job Category:</label>
+  <select id="job_category" name="job_category"class="form-control" required>
+    <option value="" selected disabled>Select a category</option>
+    <option value="software_development">Software Development</option>
+    <option value="web_development">Web Development</option>
+    <option value="mobile_development">Mobile Development</option>
+    <option value="game_development">Game Development</option>
+    <option value="artificial_intelligence">Artificial Intelligence</option>
+    <option value="blockchain">Blockchain Development</option>
+    <option value="data_analysis">Data Analysis</option>
+    <option value="data_entry">Data Entry</option>
+    <option value="project_management">Project Management</option>
+    <option value="sales_marketing">Sales and Marketing</option>
+    <option value="digital_marketing">Digital Marketing</option>
+    <option value="social_media">Social Media Management</option>
+    <option value="content_writing">Content Writing</option>
+    <option value="copywriting">Copywriting</option>
+    <option value="blog_writing">Blog Writing</option>
+    <option value="article_writing">Article Writing</option>
+    <option value="technical_writing">Technical Writing</option>
+    <option value="creative_writing">Creative Writing</option>
+    <option value="translation">Translation</option>
+    <option value="audio_production">Audio Production</option>
+    <option value="video_editing">Video Editing</option>
+    <option value="animation">Animation</option>
+    <option value="3d_design">3D Design</option>
+    <option value="graphic_design">Graphic Design</option>
+    <option value="logo_design">Logo Design</option>
+    <option value="illustration">Illustration</option>
+    <option value="branding">Branding</option>
+    <option value="packaging_design">Packaging Design</option>
+    <option value="print_design">Print Design</option>
+    <option value="product_design">Product Design</option>
+    <option value="user_experience_design">User Experience Design</option>
+    <option value="user_interface_design">User Interface Design</option>
+    <option value="photography">Photography</option>
+    <option value="virtual_assistant">Virtual Assistant</option>
+    <option value="customer_support">Customer Support</option>
+    <option value="administrative_support">Administrative Support</option>
+    <option value="accounting">Accounting</option>
+    <option value="bookkeeping">Bookkeeping</option>
+    <option value="tax_preparation">Tax Preparation</option>
+    <option value="business_consulting">Business Consulting</option>
+    <option value="legal_services">Legal Services</option>
+    <option value="real_estate">Real Estate</option>
+    <option value="architecture">Architecture</option>
+    <option value="interior_design">Interior Design</option>
+    <option value="landscape_design">Landscape Design</option>
+    <option value="energy_consulting">Energy Consulting</option>
+    <option value="market_research">Market Research</option>
+    <option value="telemarketing">Telemarketing</option>
+    <option value="other">Other</option>
+  </select>
+</div>
+            <div class="mb-3">
+              <label for="job_description" class="form-label">Job Description:</label>
+              <textarea id="job_description" name="job_description" class="form-control" required></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="job_requirements" class="form-label">Job Requirements:</label>
+              <textarea id="job_requirements" name="job_requirements" class="form-control" required></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="job_duration" class="form-label">Job Duration:</label>
+              <select id="job_duration" name="job_duration" class="form-control">
+                <option value="1 week">1 week</option>
+                <option value="2 weeks">2 weeks</option>
+                <option value="1 month">1 month</option>
+                <option value="2 months">2 months</option>
+                <option value="3 months">3 months</option>
+                <option value="more than 3 months">More than 3 months</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="job_budget" class="form-label">Job Budget:</label>
+              <input type="number" id="job_budget" name="job_budget" class="form-control" required>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Company Details</legend>
+            <div class="mb-3">
+              <label for="company_name" class="form-label">Company Name:</label>
+              <input type="text" id="company_name" name="company_name" class="form-control" required>
+            </div>
+            <div class="mb-3">
+              <label for="company_website" class="form-label">Company Website:</label>
+              <input type="url" id="company_website" name="company_website" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label for="company_description" class="form-label">Company Description:</label>
+              <textarea id="company_description" name="company_description" class="form-control"></textarea>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Contact Details</legend>
+            <div class="mb-3">
+              <label for="contact_name" class="form-label">Contact Name:</label>
+              <input type="text" id="contact_name" name="contact_name" class="form-control" required>
+            </div>
+            <div class="mb-3">
+              <label for="contact_email" class="form-label">Contact Email:</label>
+              <input type="email" id="contact_email" name="contact_email" class="form-control" required>
+            </div>
+            <div class="mb-3">
+              <label for="contact_phone" class="form-label">Contact Phone:</label>
+               <input type="number" id="contact_phone" name="contact_phone" class="form-control" required>
+
+        </fieldset>
+<button type="submit" class="post-job-button">Post Job</button>
+      </form>
+    </main>
+  </div>
+
+  <div class="col-md-6">
+    <img src="{% static 'images/post_job.png' %}" style="width: 500px;">
+      </div></div>
+</fieldset></form></main></div></div>
+<style type="text/css">
+  /* General Styles */
+/* Global styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: white;
+}
+
+  h1 {
+    transition: all 0.3s ease-in-out;
+  }
+  
+  h1:hover {
+    color: #ff7f50;
+    transform: rotateY(360deg);
+  }
+.animate-heading {
+  animation-name: heading-animation;
+  animation-duration: 1s;
+  animation-delay: 0s;
+  animation-fill-mode: forwards;
+  transform-origin: center;
+}
+.post-job-button {
+  background-color: #3498db;
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.post-job-button:hover {
+  background-color: #2980b9;
+}
+@keyframes heading-animation {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+form {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 800px;
+}
+
+fieldset {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 0.25rem;
+}
+
+legend {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+/* Style for all textboxes */
+input[type="text"],
+input[type="url"],
+input[type="email"],
+input[type="tel"],
+textarea {
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+/* Style for focused textbox */
+input[type="text"]:focus,
+input[type="url"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+textarea:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Style for required textbox label */
+label[for][required]:before {
+  content: "* ";
+  color: #f00;
+}
+
+input[type="submit"]:hover,
+button[type="submit"]:hover {
+  background-color: #0069d9;
+}
+
+/* Specific styles */
+#job_title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+textarea {
+  height: 10rem;
+}
+
+#job_duration {
+  width: 50%;
+}
+
+#job_budget {
+  width: 50%;
+}
+
+#company_website {
+  margin-bottom: 1rem;
+}
+
+#contact_phone {
+  margin-bottom: 1rem;
+}
+form {
+  background-color: #f5f5f5;
+}
+
+@media screen and (max-width: 768px) {
+  form {
+    padding: 1rem;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="url"],
+  select,
+  textarea {
+    font-size: 0.9rem;
+  }
+
+  input[type="submit"],
+  button[type="submit"] {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+</style>
+  {% endblock %}

@@ -1,0 +1,109 @@
+{% extends 'index/navbar.html' %}
+{% load static %}
+{% block content %} 
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login Page</title>
+    <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-TyG5PL5ThQX9J3q3qf/+ZwOaGzhAiwcIsc+HIjb1UjKkG6vX9oY62++oK+vU2yhMkdzFEnUJd1erF5KPDPViQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- Custom CSS -->
+    <style>
+      .card {
+        margin-top: 50px;
+      }
+      .form-control:focus {
+        box-shadow: none;
+      }
+      .btn-primary {
+        background-color: navy;
+        border-color: pink;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        font-weight: bold;
+        letter-spacing: 2px;
+        margin-top: 25px;
+        margin-bottom: 25px;
+      }
+      .btn-primary:hover {
+        background-color: #0062cc;
+        border-color: #0062cc;
+        transform: translateY(-5px);
+        box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+      }
+    </style>
+  </head>
+  <body>
+<div class="container">
+
+  <div class="row justify-content-center">
+    <div class="col-md-6 text-left">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="text-center">Login</h4>
+        </div>
+ <div class="card-body">
+
+  <form id="login-form" method="POST" action="studentlogin">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="username" class="sr-only">Username</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text"><i class="fa fa-user"></i></div>
+        </div>
+        <input type="text" class="form-control" id="username" name="username" placeholder="Enter username">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="password" class="sr-only">Password</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text"><i class="fa fa-lock"></i></div>
+        </div>
+        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">Login</button>
+  </form>
+  <div class="forgot-password">
+    <a href="/student/forgot-password">Forgot Password?</a>
+  </div>
+    {% if message %}
+  <div style="color: red;font-weight: bold">{{ message }}</div>
+  {% endif %}
+</div>
+
+        <div class="card-footer">
+          <p class="text-muted text-center">Don't have an account? <a href="/student/studentregister">Sign up</a></p>
+        </div>
+
+      </div>
+       <button class="btn btn-secondary back-btn" style="margin-left: 10px;background-color: grey" onclick="history.back()">Back</button>
+    </div>
+
+    <div class="col-md-6">
+      <br><br><br>
+      <img src="{% static 'images/login.png' %}" style="width: 100%">
+    </div>
+  </div>
+</div><br><br>
+    <script type="text/javascript">
+    
+
+    </script>
+    <!-- jQuery, Popper.js, Bootstrap JS -->
+   
+  </body>
+</html>
+{% endblock %}

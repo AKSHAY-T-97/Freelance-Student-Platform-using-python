@@ -1,0 +1,161 @@
+{% extends 'index/login_navbar.html' %}
+{% load static %}
+{% block content %} 
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+     <link rel="stylesheet" href="{% static 'css/profile.css' %}" >
+    <!-- Custom CSS -->
+</head>
+
+<body>
+    <div class="container">
+      <div class="profile-header">
+        <div class="profile-pic">
+            {% if full_details.gender == 'male' %}
+           <img src="{% static 'images/male.png' %}" >
+            {% else %}
+           <img src="{% static 'images/female.png' %}" >
+            {% endif %}
+
+        </div>
+        <h1>  &nbsp;  &nbsp; {{full_details.user.username}}</h1>
+       <br><p style="color: white;margin-left: 20px">Student</p>
+
+    </div>
+
+      <i class="fas fa-chevron-down scroll-down"></i>
+  <div class="row profile-info">
+  <div class="col-md-6">
+   
+    <ul>
+
+      <div class="welcome-message" style="margin-left: 5px;margin-top: 200px;">
+         
+  <p ><a style="color:green">Welcome back! </a>We're glad to have you here. Our website is designed to help students like you easily find the latest freelance jobs near you. With our platform, you can discover exciting opportunities and take your career to new heights. Thanks for choosing us and we hope you have a great experience!</p>
+     <a href="/student/search_job" >  <button class="my-button" > Search Jobs </button></a>
+      </div>
+    </ul>
+  </div>
+  <br>  <br>  <br>  <br>
+  <div class="col-md-6 ">
+
+    <img src="{% static 'images/profile1.png' %}" style="width: 100%">
+  </div>
+</div>
+            </div>
+              <br>  <br>  <br>  <br>  
+            <div class="row">
+              <div class="col-md-6">
+                
+                <img src="{% static 'images/profile2.png' %}" style="width: 100%">
+                 </div>
+                <div class="col-md-5">
+              <div class="quote-box">
+  <p>"At our website, we offer a platform for students to showcase their academic projects, share their college reviews, and raise their voices anonymously to the public. We believe in providing a space where students can freely express themselves and connect with a wider community. So, if you're looking for a place to share your ideas and opinions, look no further. Join us and let your voice be heard!"</p>
+</div>
+           
+<button class="my-button" style="text-align: center" onclick="openPopup()">STUDENTS CORNER</button>
+
+<div id="popup" class="popup">
+  <div class="popup-content">
+    <div class="popup-header">
+      <h2>Students Corner</h2>
+      <span class="close" onclick="closePopup()">&times;</span>
+    </div>
+    <div class="popup-buttons">
+<button  class="button-1"><a  style="color: white" href="/student/document_uploads">Share Notes, PDF, PPT</a></button>
+      <button class="button-2"><a  style="color: white" href="/student/reviews">Add college / school Reviews</a></button>
+     
+    </div>
+  </div>
+</div>
+    <!-- Bootstrap JS -->
+   
+
+</div></div></body>
+ <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<style type="text/css">
+  
+.profile-header {
+  background-image: url('{% static 'images/profile_header.png' %}');
+  background-size: cover;
+  background-position: center center;
+  height: 100vh; /* set the desired height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff; /* set the desired text color */
+  text-align: center;
+}
+
+.profile-header h1 {
+  font-size: 48px;
+  color: #333;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.profile-header p {
+  font-size: 24px;
+  color: #999;
+  margin-bottom: 0;
+}
+
+/* Profile Picture */
+
+.profile-pic {
+  position: relative;
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: scale-up 0.5s ease-out;
+}
+
+.profile-pic img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+</style>
+
+<!-- Custom JavaScript -->
+<script>
+  function scrollToInfo() {
+    document.querySelector('.profile-info').scrollIntoView({ behavior: 'smooth' });
+  }
+  document.querySelector('.scroll-down').addEventListener('click', scrollToInfo);
+</script>
+
+<script>
+      function openPopup() {
+    document.getElementById('popup').style.display='block';
+  }
+
+  function closePopup() {
+    document.getElementById('popup').style.display='none';
+  }
+</script>
+  {% endblock %}
+</html>

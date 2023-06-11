@@ -1,0 +1,76 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Website</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <!-- Custom CSS -->
+ <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/login.css' %}" >
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+   <img src="{% static 'images/icon.png' %}" width="150px;" height="40px;">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/student/profile"><b>HOME</b> <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="nav" href="/student/search_job">FIND JOBS</a>
+        </li>
+         <li class="nav-item">
+          <a class="nav-link" id="nav_free" href="accepted_job">MY JOBS</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"><b>STUDENTS CORNER</b></a>
+        </li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-user" aria-hidden="true" style="color: green"></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="/student/change_password">Change Password</a>
+            <a class="dropdown-item" href="/student/logout">Logout</a>
+
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+{% block content %}
+
+{% endblock %}
+
+   <footer>
+  
+ 
+  <h3><b>Contact Us</b></h3>
+  <p>If you have any questions or comments, please don't hesitate to contact us:</p>
+  <ul>
+    <li>Email: akshaytakku@gmail.com</li>
+    <li>Phone: 6282495540</li>
+    <li>Address: kerala,INDIA</li>
+  </ul>
+
+
+        <p class="mb-0">&copy; 2023 My Website. All rights reserved.</p>
+    </footer>
+    <script type="text/javascript">
+      $(window).scroll(function() {
+  if ($(document).scrollTop() > 50) {
+    $('.navbar').addClass('fixed-top');
+  } else {
+    $('.navbar').removeClass('fixed-top');
+  }
+});
+    </script>

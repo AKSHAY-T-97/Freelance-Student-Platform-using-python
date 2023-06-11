@@ -1,0 +1,214 @@
+{% extends 'recruits/recruiter_nav.html' %}
+{% load static %}
+{% block content %} 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<br><br><br>
+  <br>
+   <button class="btn btn-secondary back-btn" style="margin-left: 10px;background-color: grey" onclick="history.back()">Back</button>
+<div class="search-bar">
+  <h4><b>SEARCH:</b></h4>
+  <div class="input-group">
+    <input type="search" class="form-control rounded" placeholder="Search" name="search" id="search">
+    <button type="button" class="btn btn-outline-primary" name="btnsearch" id="btnsearch">Search</button>
+  </div>
+  {% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+{% endif %}
+  <div class="buttons">
+    <a href="/field/form"><button type="button" class="btn btn-outline-danger" name="ADD" id="add">ADD</button></a>
+
+  </div>
+</div>
+<div id="job-list-container">
+{% include 'recruits/job_list_pagination.html' %}
+ </div>
+ <script type="text/javascript">
+$(document).ready(function() {
+  $('#search').on('keyup', function() {
+    var search_text = $(this).val();
+    $.ajax({
+
+      url: '/recruiter_stud/job_listing',
+      type: 'GET',
+      data: { search: search_text },
+      dataType: 'json',
+      success: function(response) {
+        $('#job-list-container').html(response);
+      },
+      error: function(xhr, status, error) {
+        console.log(error);
+      }
+    });
+  });
+});
+</script>
+<!-- Display pagination links -->
+<style type="text/css">
+    .search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 80%;
+  margin: 0 auto;
+  padding: 12px;
+}
+
+.search-bar h4 {
+  margin: 0;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  margin-left: 50px;
+}
+
+.sort-bar {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  margin-left: 30px;
+}
+
+.sort-bar label {
+  margin-right: 10px;
+}
+
+.form-control {
+  width: 100%;
+}
+
+.btn {
+  margin: 0 5px;
+}
+
+.btn-outline-primary {
+  color: #007bff;
+  background-color: transparent;
+  border-color: #007bff;
+}
+
+.btn-outline-primary:hover {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-outline-danger {
+  color: #dc3545;
+  background-color: transparent;
+  border-color: #dc3545;
+}
+
+.btn-outline-danger:hover {
+  color: #fff;
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.table {
+  border-radius: 2;
+  border-color: black;
+  margin-top: 20px;
+}
+
+.table th {
+  color: white;
+  background-color: #e638f4;;
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.page-item {
+  display: inline-block;
+  margin: 0 5px;
+}
+
+.page-link {
+  color: #007bff;
+  background-color: transparent;
+  border-color: #007bff;
+}
+
+.page-link:hover {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+ .card-body {
+        padding: 0;
+    }
+    
+    table {
+        border-collapse: separate;
+        border-spacing: 0 10px;
+        width: 100%;
+    }
+    
+    th, td {
+        padding: 10px;
+        text-align: left;
+    }
+    
+    th {
+        background-color: #F1F1F1;
+    }
+    
+    tr:nth-child(even) {
+        background-color: #F9F9F9;
+    }
+    
+    .delete_button {
+        background-color: transparent;
+        border: none;
+        padding: 0;
+    }
+    
+    .delete_button a {
+        color: red;
+    }
+    
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 30px;
+    }
+    
+    .step-links a {
+        padding: 5px;
+        text-decoration: none;
+        color: #333;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin: 0 5px;
+    }
+    
+    .step-links a:hover {
+        background-color: #ddd;
+    }
+    
+    .current-page {
+        font-weight: bold;
+        margin: 0 10px;
+    }
+</style>
+{% endblock %}

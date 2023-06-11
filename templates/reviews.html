@@ -1,0 +1,327 @@
+{% extends 'index/navbar.html' %}
+{% load static %}
+{% block content %}
+     <link rel="stylesheet" href="style.css">
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="validation.css">
+  <!-- Link to jQuery library -->
+
+  <!-- Link to jQuery Validation plugin -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+  <!-- Custom script for form validation -->
+  <script src="validate.js"></script>
+  <br>
+   <button class="btn btn-secondary back-btn" style="margin-left: 10px;background-color: grey" onclick="history.back()">Back</button>
+  <div class="container" >
+      {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+ <i>NOTE</i>:<b style="color: green">  Your identity will remain anonymous to others when your review is posted</b>
+<div class="rating-form" >
+  <h2>Rate a School or College</h2>
+  <form action="/student/reviews" method="post" id="rating_form">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="school-name">School / College Name:</label>
+      <input type="text" id="school-name" name="school-name" class="form-control" required>
+    </div>
+    <div class="form-group">
+  <label for="school-name">Board / University:</label>
+  <select id="board" name="board" class="form-control" required>
+    <option value="">Select a board/university</option>
+    <option value="CBSE">Central Board of Secondary Education (CBSE)</option>
+    <option value="ICSE">Indian Certificate of Secondary Education (ICSE)</option>
+    <option value="BSEB">Bihar School Examination Board (BSEB)</option>
+    <option value="ISC">Indian School Certificate (ISC)</option>
+    <option value="UPMSP">Uttar Pradesh Madhyamik Shiksha Parishad (UPMSP)</option>
+    <option value="Maharashtra Board">Maharashtra State Board of Secondary and Higher Secondary Education</option>
+    <option value="GSEB">Gujarat Secondary and Higher Secondary Education Board (GSEB)</option>
+    <option value="Rajasthan Board">Rajasthan Board of Secondary Education</option>
+    <option value="MPBSE">Madhya Pradesh Board of Secondary Education (MPBSE)</option>
+    <option value="TN Board">Tamil Nadu State Board of Secondary Education</option>
+    <option value="Kerala Board">Kerala Board of Public Examinations</option>
+    <option value="West Bengal Board">West Bengal Council of Higher Secondary Education (WBCHSE)</option>
+    <option value="BHU">Banaras Hindu University (BHU)</option>
+    <option value="DU">University of Delhi (DU)</option>
+     <option value="Kannur University">Kannur University</option>
+    <option value="JNU">Jawaharlal Nehru University (JNU)</option>
+    <option value="IGNOU">Indira Gandhi National Open University (IGNOU)</option>
+    <option value="AMU">Aligarh Muslim University (AMU)</option>
+    <option value="JMI">Jamia Millia Islamia (JMI)</option>
+    <option value="IITB">Indian Institute of Technology Bombay (IITB)</option>
+    <option value="IITD">Indian Institute of Technology Delhi (IITD)</option>
+    <option value="IITG">Indian Institute of Technology Guwahati (IITG)</option>
+    <option value="IITK">Indian Institute of Technology Kanpur (IITK)</option>
+    <option value="IITM">Indian Institute of Technology Madras (IITM)</option>
+    <option value="IITKGP">Indian Institute of Technology Kharagpur (IITKGP)</option>
+    <option value="BITS Pilani">Birla Institute of Technology and Science, Pilani</option>
+    <option value="AIIMS Delhi">All India Institute of Medical Sciences, Delhi</option>
+    <option value="AIIMS Bhopal">All India Institute of Medical Sciences, Bhopal</option>
+    <option value="AIIMS Jodhpur">All India Institute of Medical Sciences, Jodhpur</option>
+    <option value="AIIMS Patna">All India Institute of Medical Sciences, Patna</option>
+    <option value="AIIMS Rishikesh">All India Institute of Medical Sciences, Rishikesh</option>
+    <option value="IISc Bangalore">Indian Institute of Science, Bangalore</option>
+    <option value="University of Mumbai">University of Mumbai</option>
+<option value="University of Calcutta">University of Calcutta</option>
+<option value="University of Madras">University of Madras</option>
+<option value="University of Hyderabad">University of Hyderabad</option>
+<option value="University of Pune">University of Pune</option>
+<option value="University of Delhi">University of Delhi</option>
+<option value="University of Calicut">University of Calicut</option>
+<option value="University of Allahabad">University of Allahabad</option>
+<option value="University of Rajasthan">University of Rajasthan</option>
+<option value="University of Lucknow">University of Lucknow</option>
+<option value="University of Jammu">University of Jammu</option>
+<option value="University of Kashmir">University of Kashmir</option>
+<option value="University of Mysore">University of Mysore</option>
+<option value="University of Kerala">University of Kerala</option>
+<option value="University of Calcutta">University of Calcutta</option>
+<option value="University of North Bengal">University of North Bengal</option>
+<option value="University of Gour Banga">University of Gour Banga</option>
+<option value="Punjab University">Punjab University</option>
+<option value="Panjab University">Panjab University</option>
+<option value="Guru Nanak Dev University">Guru Nanak Dev University</option>
+<option value="Thapar University">Thapar University</option>
+<option value="Amrita Vishwa Vidyapeetham">Amrita Vishwa Vidyapeetham</option>
+<option value="Birla Institute of Technology">Birla Institute of Technology</option>
+<option value="Indian Institute of Science Education and Research, Pune">Indian Institute of Science Education and Research, Pune</option>
+<option value="Indian Institute of Science Education and Research, Kolkata">Indian Institute of Science Education and Research, Kolkata</option>
+<option value="Indian Institute of Science Education and Research, Mohali">Indian Institute of Science Education and Research, Mohali</option>
+<option value="Indian Institute of Science Education and Research, Bhopal">Indian Institute of Science Education and Research, Bhopal</option>
+<option value="Indian Institute of Science Education and Research, Thiruvananthapuram">Indian Institute of Science Education and Research, Thiruvananthapuram</option>
+<option value="Indian Institute of Science Education and Research, Tirupati">Indian Institute of Science Education and Research, Tirupati</option>
+<option value="Indian Statistical Institute, Kolkata">Indian Statistical Institute, Kolkata</option>
+    <option value="Other">Other</option>
+</select></div>
+
+   <div class="form-group">
+  <label for="state">State:</label>
+  <select id="state" name="state" class="form-control" required>
+    <option value="">Select a state</option>
+    <option value="Andhra Pradesh">Andhra Pradesh</option>
+    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+    <option value="Assam">Assam</option>
+    <option value="Bihar">Bihar</option>
+    <option value="Chhattisgarh">Chhattisgarh</option>
+    <option value="Goa">Goa</option>
+    <option value="Gujarat">Gujarat</option>
+    <option value="Haryana">Haryana</option>
+    <option value="Himachal Pradesh">Himachal Pradesh</option>
+    <option value="Jharkhand">Jharkhand</option>
+    <option value="Karnataka">Karnataka</option>
+    <option value="Kerala">Kerala</option>
+    <option value="Madhya Pradesh">Madhya Pradesh</option>
+    <option value="Maharashtra">Maharashtra</option>
+    <option value="Manipur">Manipur</option>
+    <option value="Meghalaya">Meghalaya</option>
+    <option value="Mizoram">Mizoram</option>
+    <option value="Nagaland">Nagaland</option>
+    <option value="Odisha">Odisha</option>
+    <option value="Punjab">Punjab</option>
+    <option value="Rajasthan">Rajasthan</option>
+    <option value="Sikkim">Sikkim</option>
+    <option value="Tamil Nadu">Tamil Nadu</option>
+    <option value="Telangana">Telangana</option>
+    <option value="Tripura">Tripura</option>
+    <option value="Uttar Pradesh">Uttar Pradesh</option>
+    <option value="Uttarakhand">Uttarakhand</option>
+    <option value="West Bengal">West Bengal</option>
+  </select>
+</div>
+<div class="form-group">
+      <label for="school-name">Disctrict:</label>
+      <input type="text" id="district" name="district" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label for="rating">Rating:</label>
+      <div class="rating">
+        <input type="radio" id="star1" name="rating" value="1" required><label for="star1"></label>
+         <input type="radio" id="star2" name="rating" value="2" required><label for="star2"></label>
+         <input type="radio" id="star3" name="rating" value="3" required><label for="star3"></label>
+         <input type="radio" id="star4" name="rating" value="4" required><label for="star4"></label>
+        <input type="radio" id="star5" name="rating" value="5" required><label for="star5"></label>
+        
+        
+       
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="comments">Comments:</label>
+      <textarea id="comments" name="comments" class="form-control"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit Rating</button>
+
+  </form>
+
+</div>
+</div>
+<style>
+/* Star rating CSS */
+
+
+.messages {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.messages li {
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+}
+
+.messages li.success {
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+  color: #155724;
+}
+
+.messages li.warning {
+  background-color: #fff3cd;
+  border-color: #ffeeba;
+  color: #856404;
+}
+
+.messages li.error {
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  color: #721c24;
+}
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+label.error {
+  color: #dc3545;
+  font-size: 14px;
+  font-weight: normal;
+  margin-top: 5px;
+  display: block;
+}
+.rating {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-direction: row-reverse;
+}
+
+.rating input[type="radio"] {
+  display: none;
+}
+
+.rating label {
+  font-size: 30px;
+  color: #ccc;
+  cursor: pointer;
+  margin-right: 10px;
+  order: 1;
+}
+
+.rating label:before {
+  content: "\2605";
+}
+
+.rating input[type="radio"]:checked ~ label {
+  color: #ffc107;
+}
+
+.rating label:hover,
+.rating label:hover ~ label,
+.rating input:checked ~ label {
+  color: orange;
+}
+
+.rating input[type="radio"] ~ label:first-of-type {
+  margin-right: 0;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+button[type="submit"] {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.25s;
+}
+
+button[type="submit"]:hover {
+  background-color: #0062cc;
+}
+
+</style>
+<script type="text/javascript">
+  $(document).ready(function() {
+  $('#rating_form').validate({
+    errorPlacement: function(error, element) {
+      // Add error message after the input element
+      error.insertAfter(element);
+    },
+    success: function(label) {
+      // Add success message after the input element
+      label.addClass('valid').text('✓');
+    },
+    rules: {
+      // Define validation rules for each input field
+      'school-name': {
+        required: true,
+        minlength: 3
+      },
+      state: {
+        required: true
+      },
+      district: {
+        required: true,
+        minlength: 3
+      },
+      rating: {
+        required: true
+      }
+    },
+    messages: {
+      // Define error messages for each validation rule
+      'school-name': {
+        required: 'Please enter a school or college name',
+        minlength: 'School or college name must be at least 3 characters long'
+      },
+      state: {
+        required: 'Please select a state'
+      },
+      district: {
+        required: 'Please enter a district name',
+        minlength: 'District name must be at least 3 characters long'
+      },
+      rating: {
+        required: 'Please select a rating'
+      }
+    }
+  });
+});
+
+</script>
+  {% endblock %}

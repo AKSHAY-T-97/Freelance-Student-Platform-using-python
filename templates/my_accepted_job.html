@@ -1,0 +1,76 @@
+{% extends 'index/login_navbar.html' %}
+{% load static %}
+{% block content %} 
+ <link rel="stylesheet" href="style.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <!-- Link to jQuery library -->
+<br><br><br><br><br><br>
+ <button class="btn btn-secondary back-btn" style="margin-left: 10px;background-color: grey" onclick="history.back()">Back</button>
+
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      {% if details %}
+        {% for job_status in details %}
+          <div class="card mb-3">
+            <div class="card-header">
+              <h3 style="color: green">ACCEPTED JOB &nbsp;&nbsp;&nbsp;<i class="fas fa-check-circle"></i></h3>
+            </div>
+            <div class="card-body">
+              <h5><i class="fas fa-briefcase"></i> Job Title : {{ job_status.Job.job_title }}</h5>
+              <h5><i class="fas fa-building"></i> Company Name : {{ job_status.Job.company_name }}</h5>
+              <h5><i class="fas fa-align-left"></i> Description : {{ job_status.Job.job_description }}</h5>
+              <h5><i class="fas fa-clock"></i> Duration : {{ job_status.Job.job_duration }}</h5>
+              <h5><i class="fas fa-phone"></i> Contact : {{ job_status.Job.contact_phone }}</h5>       
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="alert alert-danger" role="alert">
+          No jobs accepted
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<style>
+.card {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  background-color: #f2f2f2;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card-body h5 {
+  font-size: 18px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.card-body i {
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+.alert {
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+</style>
+
+{% endblock %}

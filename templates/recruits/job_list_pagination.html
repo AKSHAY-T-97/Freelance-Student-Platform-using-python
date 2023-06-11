@@ -1,0 +1,225 @@
+<div style="font-family: bold; font-size: 20px; padding-top: 60px;">
+  <div class="activesuccess" style="color: green; font-size: 24px; padding-left: 100px;"></div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card card-primary">
+          <div class="card-header">List</h3>
+          </div>
+          <div class="card-body">
+            <div class="form-group">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Title</th>    
+                    <th scope="col">Description</th>
+                    <th scope="col">Duration</th>
+                    <th scope="col">Budget</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for job in page_obj %}
+                  <tr>
+                    <td><b>{{ job.job_title }}</b></td>
+                    <td>{{ job.job_description }}</td>
+                    <td>{{ job.job_duration }}</td>
+                    <td>{{ job.job_budget }}</td>
+                    <td>
+                     <a href="accept_reject/{{job.id}}" title="Edit">
+   <i class="fas fa-eye" style="font-size:24px;color:blue"></i>
+</a>&nbsp;
+<button onclick="confirmAction()" class="delete_button" title="Delete">
+  <a href="/seller/plandelete/{{ job.id }}/">
+    <i class="fas fa-trash-alt" style="font-size:24px;color:red"></i>
+  </a>
+</button>      
+                    </td>
+                  </tr>
+                  {% endfor %} 
+                </tbody>
+              </table>
+            </div>
+
+                     
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current-page">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+<style>
+   .search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 80%;
+  margin: 0 auto;
+  padding: 12px;
+}
+
+.search-bar h4 {
+  margin: 0;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  margin-left: 50px;
+}
+
+.sort-bar {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  margin-left: 30px;
+}
+
+.sort-bar label {
+  margin-right: 10px;
+}
+
+.form-control {
+  width: 100%;
+}
+
+.btn {
+  margin: 0 5px;
+}
+
+.btn-outline-primary {
+  color: #007bff;
+  background-color: transparent;
+  border-color: #007bff;
+}
+
+.btn-outline-primary:hover {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-outline-danger {
+  color: #dc3545;
+  background-color: transparent;
+  border-color: #dc3545;
+}
+
+.btn-outline-danger:hover {
+  color: #fff;
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.table {
+  border-radius: 2;
+  border-color: black;
+  margin-top: 20px;
+}
+
+.table th {
+  color: white;
+  background-color: #e638f4;;
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.page-item {
+  display: inline-block;
+  margin: 0 5px;
+}
+
+.page-link {
+  color: #007bff;
+  background-color: transparent;
+  border-color: #007bff;
+}
+
+.page-link:hover {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+ .card-body {
+        padding: 0;
+    }
+    
+    table {
+        border-collapse: separate;
+        border-spacing: 0 10px;
+        width: 100%;
+    }
+    
+    th, td {
+        padding: 10px;
+        text-align: left;
+    }
+    
+    th {
+        background-color: #F1F1F1;
+    }
+    
+    tr:nth-child(even) {
+        background-color: #F9F9F9;
+    }
+    
+    .delete_button {
+        background-color: transparent;
+        border: none;
+        padding: 0;
+    }
+    
+    .delete_button a {
+        color: red;
+    }
+    
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 30px;
+    }
+    
+    .step-links a {
+        padding: 5px;
+        text-decoration: none;
+        color: #333;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin: 0 5px;
+    }
+    
+    .step-links a:hover {
+        background-color: #ddd;
+    }
+    
+    .current-page {
+        font-weight: bold;
+        margin: 0 10px;
+    }
+</style>
